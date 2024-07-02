@@ -43,9 +43,7 @@ struct HealthDataListView: View {
                     TextField("Value", text: $valueToAdd)
                         .multilineTextAlignment(.trailing)
                         .frame(width: 140)
-                    
                 }
-                
             }
             .navigationTitle(metric.title)
             .toolbar {
