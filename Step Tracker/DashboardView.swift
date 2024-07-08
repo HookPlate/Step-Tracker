@@ -74,15 +74,15 @@ struct DashboardView: View {
                     .background(RoundedRectangle(cornerRadius: 12).fill(Color(.secondarySystemBackground)))
                     
                     VStack(alignment: .leading) {
-                            VStack(alignment: .leading) {
-                                Label("Averages", systemImage: "calendar")
-                                    .font(.title3.bold())
-                                    .foregroundStyle(.pink)
-                                
-                                Text("Last 28 Days")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
+                        VStack(alignment: .leading) {
+                            Label("Averages", systemImage: "calendar")
+                                .font(.title3.bold())
+                                .foregroundStyle(.pink)
+                            
+                            Text("Last 28 Days")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
                         .padding(.bottom, 12)
                         
                         RoundedRectangle(cornerRadius: 12)
@@ -96,7 +96,6 @@ struct DashboardView: View {
             .navigationTitle("DashBoard")
             .padding()
             .task {
-               // await hkManager.addSimulatorData()
                 isShowingPermissionPrimingSheet = !hasSeenPermissionPriming
             }
             .navigationDestination(for: HealthMetricContext.self) { metric in
