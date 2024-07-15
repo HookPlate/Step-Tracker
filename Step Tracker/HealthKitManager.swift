@@ -30,10 +30,15 @@ import Observation
                                                                options: .cumulativeSum,
                                                                anchorDate: endDate,
                                                                intervalComponents: .init(day: 1))
-        let stepCounts = try! await stepsQuery.result(for: store)
-        stepData = stepCounts.statistics().map {
-            .init(date: $0.startDate, value: $0.sumQuantity()?.doubleValue(for: .count()) ?? 0)
+        do {
+            let stepCounts = try await stepsQuery.result(for: store)
+            stepData = stepCounts.statistics().map {
+                .init(date: $0.startDate, value: $0.sumQuantity()?.doubleValue(for: .count()) ?? 0)
+            }
+        } catch {
+            
         }
+        
     }
     
     func fetchWeights() async {
@@ -48,9 +53,15 @@ import Observation
                                                                options: .mostRecent,
                                                                anchorDate: endDate,
                                                                intervalComponents: .init(day: 1))
-        let weights = try! await weightQuery.result(for: store)
-        weightData = weights.statistics().map {
-            .init(date: $0.startDate, value: $0.minimumQuantity()?.doubleValue(for: .pound()) ?? 0)
+        //these do try catch blocks will return an empty array if it all falls through. It was crashing my preview before.
+        do {
+            let weights = try! await weightQuery.result(for: store)
+            weightData = weights.statistics().map {
+                .init(date: $0.startDate, value: $0.minimumQuantity()?.doubleValue(for: .pound()) ?? 0)
+            }
+        } catch {
+            
         }
+        
     }
 }
